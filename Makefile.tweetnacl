@@ -1,0 +1,20 @@
+
+CC=cc
+CFLAGS=-Wall -I/usr/local/include -O2
+CFLAGS+=-Iother
+CFLAGS+=-Itweetnacl
+CFLAGS+=-Werror
+CFLAGS+=-Wno-pointer-sign -Wno-unused-result
+
+OBJS=reop.o other/other.o tweetnacl/tweetnacl.o tweetnacl/devurandom.o
+
+reop: ${OBJS}
+	${CC} ${OBJS} ${LDFLAGS} -o reop
+
+clean:
+	rm -f ${OBJS} reop
+
+.SUFFIXES: .c .o
+.c.o:
+	${CC} ${CFLAGS} -c $< -o $@
+
